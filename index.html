@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+    <title>
+        Lista de tareas
+    </title>
+    <head>
+        <link rel="stylesheet" type="text/css" href="estilo.css">
+    </head>
+
+    <body>
+            <nav class="buscador">
+                <input id="searchItem" type="text">
+                <span class="buscadorBtn" onclick="functionSearch()">Buscar</span>
+            </nav>
+           
+            <div class="header">
+                <input id="inputTask" type="text">
+                <button id="buttonAgregar" type="button" onclick="functionAgregar()">Agregar</button>
+                <span onclick="functionAgregar()">Agregar</span>
+                <ul id="listTask"></ul>
+            </div>
+
+
+        <script>
+            var arrayList = document.getElementsByTagName('LI');
+        console.log(arrayList);
+        var i;
+         for (i = 0; i < arrayList.length; i++) {
+             var span = document.createElement("SPAN");
+             var txt = document.createTextNode("\u00D7");
+             span.className = "close";
+             span.appendChild(txt);
+             arrayList[i].appendChild(span);
+         }
+             var close = document.getElementsByClassName("close");
+             var i;
+             for (i = 0; i < close.length; i++) {
+                 close[i].onclick = function() {
+                 var div = this.parentElement;
+                 div.style.display = "none";
+             }
+                }
+         var list = document.querySelector('ul');
+         list.addEventListener('click', function(ev){
+             if (ev.target.tagName === 'LI') {
+                 ev.target.classList.toggle('checked');
+             }
+
+         }, false);
+         function functionAgregar() {
+            var taskToAdd = document.getElementById("inputTask").value;
+            console.log(taskToAdd);
+            if(taskToAdd!==''){
+                 var liList = document.createElement("li");
+                 var text = document.createTextNode(taskToAdd);
+                 liList.appendChild(text);
+                 document.getElementById("listTask").appendChild(liList);
+            } else{
+                alert("You must type something :(");
+             }
+             document.getElementById("inputTask").value = "";
+             var span = document.createElement("SPAN");
+             var txt = document.createTextNode("\u00D7");
+             span.className = "close";
+             span.appendChild(txt);
+             liList.appendChild(span);
+
+             for (i = 0; i < close.length; i++) {
+                 close[i].onclick = function() {
+                     var div = this.parentElement;
+                     div.style.display = "none";
+                        }
+                        }
+                      }
+        function functionSearch(){
+            var taskToSearch = document.getElementById("searchItem").value;
+            let px = document.getElementsByTagName("UL");
+            for(var i =0; i<px.length; i++){
+                if(px[i].textContent.indexOf(taskToSearch)!=-1){
+                    alert(`${taskToSearch} ya existe`);
+                }
+            }
+            console.log(taskToSearch);
+        }
+        </script>
+    </body>
+
+        <footer>
+        </footer>
+</html>
